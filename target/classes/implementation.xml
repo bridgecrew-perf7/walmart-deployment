@@ -10,6 +10,7 @@ http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/cu
 	
 	<flow name="getProductDetailsFlow" doc:id="200a908f-d7bd-4bec-99c2-f3fe7257163a" >
 		<http:request method="GET" doc:name="Walmart API Request" doc:id="6deb8dea-387d-42fe-9066-02f3a49a7009" config-ref="HTTP_Request_configuration" requestStreamingMode="NEVER" path="${http.path}">
+			<reconnect />
 			<http:headers ><![CDATA[#[output application/java
 ---
 {
@@ -57,6 +58,7 @@ type Currency = String { format: "\$#,###.00"}
 		<set-variable value="#[100]" doc:name="minDistance" doc:id="f352bcfc-cf1e-4730-a207-5cb8201f639b" variableName="minDistance" />
 		<set-variable doc:name="address" doc:id="ec15a642-5ee3-4bd6-ba00-6d3a6ebd23dc" variableName="address" value='#[""]'/>
 		<http:request method="GET" doc:name="Walmart API Request" doc:id="e70af14a-db0c-4567-a4ac-b9793334448d" config-ref="HTTP_Request_configuration" path="/stores/list">
+			<reconnect />
 			<http:body ><![CDATA[#[output application/json
 ---
 payload]]]></http:body>
